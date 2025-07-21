@@ -1,7 +1,9 @@
-/** biome-ignore-all lint/suspicious/noConsole: <explanation> */
+/** biome-ignore-all lint/suspicious/noConsole: i want to use console.log */
+
 import { useRef, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import { createApiUrl } from '@/lib/api'
 
 const isRecordingSupported =
   !!navigator.mediaDevices &&
@@ -36,7 +38,7 @@ export function RecordRoomAudio() {
     formData.append('file', audio, 'audio.webm')
 
     const response = await fetch(
-      `http://localhost:3333/rooms/${params.roomId}/audio`,
+      createApiUrl(`/rooms/${params.roomId}/audio`),
       {
         method: 'POST',
         body: formData,
